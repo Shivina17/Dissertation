@@ -12,6 +12,7 @@ public class MusicApp {
 	private static MusicService musicService = null;
 
 	public static void main(String[] args) throws Exception {
+
 		musicService = new MusicServiceImpl();
 
 		//insertSomeMusic();
