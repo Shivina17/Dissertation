@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ACE in Action</title>
+    <meta charset="utf-8">
+    <style type="text/css" media="screen">
+        #editor {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+        }
+        .ace_support{
+            color: red;
+        }
+        .ace_function{
+            color: red;
+
+        }
+    </style>
+</head>
+<body>
+<div id="editor" style="height: 500px; width: 800px"></div>
+
+<script src="https://ajaxorg.github.io/ace-builds/src/ace.js"></script>
+<script>
+    define('ace/mode/custom', [], function(require, exports, module) {
+        var oop = require("ace/lib/oop");
+        var JSONMode = require("ace/mode/Text").Mode;
+
+        var CustomHighlightRules = require("ace/mode/custom_highlight_rules").CustomHighlightRules;
+
+        var Mode = function() {
+            this.HighlightRules = CustomHighlightRules;
+        };
+        oop.inherits(Mode, JSONMode);
+
+        (function() {
+
+        }).call(Mode.prototype);
+
+        exports.Mode = Mode;
+    });
+
+    define('ace/mode/custom_highlight_rules', [], function(require, exports, module) {
+        var oop = require("ace/lib/oop");
+        var TextHighlightRules = require("ace/mode/json_highlight_rules").JsonHighlightRules;
+
+        var CustomHighlightRules = function() {
+            this.$rules = {
+                "start": [
+                    {
+                        regex: "//+.*",
+                       // regex: "\\w+\\b",
+                        token: 'support.function',
+                    },
+                ],
+            };
+            this.normalizeRules()
+        };
+
+        oop.inherits(CustomHighlightRules, TextHighlightRules);
+
+        exports.CustomHighlightRules = CustomHighlightRules;
+    });
+
+
+    var editor = ace.edit("editor");
+
+    editor.session.setMode("ace/mode/custom");
+    editor.$rules = {        "start": [
+        {
+            regex: "\"//+.*",
+            token: 'support.function',
+        },
+    ],
+    }
+
+//    this.$rules = {
+//        "start": [
+//            {
+//                regex: "\"//+.*",
+//                token: 'support.function',
+//            },
+//        ],
+//    }
+    editor.setTheme("ace/theme/chrome");
+
+    var someString = '//fighting';
+    editor.session.setValue(someString);
+
+    console.log(editor)
+//    var dimText = function(editor, startRow, endRow) {
+//        for (var i = startRow; i <= endRow; i++) {
+//            $(editor.renderer.$textLayer.element.childNodes[i].children).addClass('ace_dimmer');
+//        }
+//    };
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Single Page Application</title>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/theme-cobalt.js" integrity="sha256-OEJvWvZJvQ8cFFLk43d1UF5DHqWdikG1n8CJQSP70TA=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/mode-yaml.js" integrity="sha256-95xNUgbfIXvRXJezV53+JM5HPO6PnJ+wZ7/GwdesKAE=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+</head>
+<body>
+
+<div id="app">
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/theme-cobalt.js" integrity="sha256-OEJvWvZJvQ8cFFLk43d1UF5DHqWdikG1n8CJQSP70TA=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/mode-yaml.js" integrity="sha256-95xNUgbfIXvRXJezV53+JM5HPO6PnJ+wZ7/GwdesKAE=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+
+</body>
+<script>
+//    var orignal = {
+//        "size": 20,
+//        "query": {
+//            "bool": {
+//                "must": [
+//                    {
+//                        "subq": "recursive"
+//                    }
+//                ],
+//                "filter": [
+//
+//                ],
+//                "must_not": [],
+//                "should": []
+//            }
+//        }
+//    };
+
+    var original = {
+        "size": 20,
+        "subq": "rec_legal_ones",
+        "bool": {
+            "must": [
+                {"subq": "legal_ones"},
+                {"subq": "illegal_ones"}
+            ]
+        }
+    }
+
+    var code = getReformedCode(original);
+    document.getElementById('app').innerHTML = code;
+    var cnt = 0;
+    function getSubqExists(data){
+
+        $.each(data, function(key, value) {
+            if ($.isArray(value) || $.isPlainObject(value)) {
+                getSubqExists(value);
+            }
+
+            if(key.toString() === "subq"){
+                cnt++;
+            }
+        });
+//        if(cnt>0)
+//            return true;
+//
+//        return false;
+
+        return cnt;
+
+    }
+
+    function getReformedCode(orignalCode) {
+        //   var code = replaceComments(JSON.parse(orignalCode));
+        // code = checkEmptyArr(code);
+        // alert(JSON.stringify(code))
+        // code = prettyprint(JSON.stringify(code));
+
+        var code =prettyprint(JSON.stringify(orignalCode));
+        var newcode = getNewCode(code);
+
+//        cnt = 0;
+//        alert(getSubqExists(JSON.parse(newcode)))
+//        newcode = prettyprint(newcode);
+//        newcode = getNewCode(newcode)
+//        alert("CODE " + newcode);
+//
+//        cnt = 0;
+//        newcode = prettyprint(newcode);
+//        alert(getSubqExists(JSON.parse(newcode)))
+
+
+        cnt = 0;
+        cnt = getSubqExists(JSON.parse(newcode));
+        if(cnt>0){
+
+            while(true) {
+                newcode = prettyprint(newcode);
+                newcode = getNewCode(newcode);
+
+                cnt = 0;
+                cnt = getSubqExists(JSON.parse(newcode));
+
+                if(cnt==0){
+                    break;
+                }
+            }
+        }
+
+//        cnt= 0;
+//        alert(getSubqExists(JSON.parse(newcode)))
+
+//
+//            var newnewcode = getNewCode(newcode);
+//            console.log("NEWCODE " + newnewcode)
+//
+//
+//            var obj = JSON.parse(newCode);
+//            alert("NEW CODE " + newCode);
+
+           // code = newCode;
+//
+//            if (!getSubqExists(obj)) {
+//                break;
+//            }
+//            else {
+//                //  code = newCode;
+//            }
+            //   }
+
+            // newCode = JSON.parse(newCode);
+            //  newCode = checkEmptyArr(newCode);
+
+            //  newCode = JSON.stringify(newCode);
+        //}
+       // var printedc = prettyprint(newnewcode)
+        newcode = prettyprint(newcode);
+        return newcode;
+
+    }
+
+
+    function getNewCode(code){
+            var lines = code.split("\n");
+
+            var newCode = "";
+            for(var i in lines){
+                var str = lines[i].trim();
+                if (str.startsWith('\"subq\"')) {
+
+                    var st = str.substring(str.indexOf("\""), (str.lastIndexOf("\"")+1))
+                    var restofst = str.substring(str.lastIndexOf("\"")+1);
+                    var obj = JSON.parse("{"+st+"}");
+                    var subqname = obj[Object.keys(obj)[0]]; // an array of object keys - but only the first level
+                    //var subqname = st.substring(9, st.length - 1);
+                    //  getOriginalSubquery(subqname);
+
+//                    var st = JSON.stringify({ "must": [ { "match_phrase": { "text": "Subutex" } }, { "match_phrase": { "text": "methadone" } } ]})
+                    if(subqname === "Subutex")
+                    var st = JSON.stringify({"lang": "en"});
+                    else if(subqname === "recursive"){
+                        var st = JSON.stringify({ "must": [ { "match_phrase": { "subq": "Subutex" } }, { "match_phrase": { "text": "methadone" } } ]})
+                    }else if(subqname === "legal_ones"){
+                        var st = JSON.stringify({ "match": {"text": "oxicodone oxicontin diamorphine codeine"}});
+                    }
+                    else if(subqname === "illegal_ones"){
+                        var st=
+                                JSON.stringify({"match": {"text": "heroin "}});
+                    }
+                    else if(subqname === "rec_legal_ones"){
+                        var st=
+                                JSON.stringify({"match_phrase":[{"subq": "legal_ones"},
+                                    {"match_phrase": "hi"}]});
+                    }
+                    else{
+                        var st=
+                                JSON.stringify({"match": {"text": "heroin "}});
+                    }
+                            //getOriginalSubquery(subqname);
+                    //  alert(st)
+
+                    var stStr = st;
+
+                    //todo
+                    if(st.startsWith("{") && st.endsWith("}")){
+                        stStr = st.substring(1, st.length -1);
+                    }
+
+                    newCode = newCode + stStr + restofst;
+
+                }
+                else {
+                    newCode = newCode + str;
+                }
+            }
+            alert(newCode)
+            return newCode;
+        }
+
+    function prettyprint(jsonString){
+        var jsonPretty = JSON.stringify(JSON.parse(jsonString),null,2);
+        return jsonPretty;
+    }
+
+</script>
+</html>

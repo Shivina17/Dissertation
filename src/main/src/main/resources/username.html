@@ -1,0 +1,445 @@
+
+<!doctype html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang="en">
+<!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Dashboard</title>
+    <meta name="description" content="Dashboard">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-icon.png">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <link rel="stylesheet" href="vendors/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="vendors/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="vendors/themify-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="vendors/flag-icon-css/css/flag-icon.min.css">
+    <link rel="stylesheet" href="vendors/selectFX/css/cs-skin-elastic.css">
+    <link rel="stylesheet" href="vendors/jqvmap/dist/jqvmap.min.css">
+
+    <link rel="stylesheet" href="assets/style.css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
+    <style type="text/css" media="screen">
+        #editor {
+            width: 1000px;
+            height: 400px;
+        }
+
+        .li{
+            display: inline-block;;
+        }
+        /*.float-right{*/
+        /*display: inline-block;*/
+        /*}*/
+
+        .post{
+            background: lightgrey;
+            width: 1000px;
+            height: auto;
+            border: hidden;
+            text-align: left;
+            color: black;
+            font-size: 12px;
+            margin-bottom: 10px;
+            overflow-y: auto;
+        }
+
+
+        #chat{
+            width: 1000px;
+            height: 400px;
+            border-style: solid;
+            border-color: dodgerblue;
+            border-width: 2px;
+        }
+
+        .collapsible{
+            display: block;
+            background: none;
+            border: none;
+        }
+
+        #username{
+            font-size: 20px;
+            color: white;
+        }
+
+        #userHref{
+            font-size: 20px;
+            color: white;
+        }
+
+
+        #postInfo{
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        #topicInfo{
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        #forumId{
+            display: inline-block;
+            font-size: 14px;
+        }
+
+        .chat {
+            /*width: 1000px;*/
+            /*height: 400px;*/
+            border: dodgerblue;
+
+        }
+
+        .postTime{
+            width: inherit;
+            height: 20px;
+            background-color: dodgerblue;
+            color: white;
+        }
+
+        .userInfo{
+            width: 28%;
+            height: inherit;
+            padding: 1%;
+            float: left;
+            display: block;
+            background-color: whitesmoke;
+        }
+
+        .info{
+            width: 68%;
+            padding: 1%;
+            height: inherit;
+            float: right;
+            display: block;
+            background-color: gray;
+        }
+
+        .margin0{
+            margin: 0;
+            line-break: auto;
+            font-size: small;
+        }
+
+        .userName{
+            font-weight: bold;
+            font-size: 18px;
+            color: dodgerblue;
+        }
+        .userStatus{
+            font-weight: bold;
+        }
+
+        .topicName{
+            font-weight: bold;
+        }
+
+        #addFilterButton{
+
+        }
+
+
+
+
+
+        button{
+            cursor: pointer;
+        }
+
+        #postmessage{
+            color: black;
+            font-size: 13px;
+            font-family: 'DejaVu Serif', Georgia, "Times New Roman", Times, serif;
+        }
+
+        /*.float-left{*/
+        /*float: left;*/
+        /*width: 150px;*/
+        /*display: inline-block;*/
+        /*}*/
+
+
+
+
+
+        menu {
+            position:absolute;
+            display:block;
+            left:0px;
+            top:0px;
+            height:20px;
+            width:20px;
+            padding:0;
+            margin:0;
+            border:1px solid;
+            background-color:white;
+            font-weight:normal;
+            white-space:nowrap;
+        }
+        menu:hover{
+            background-color:#eef;
+            font-weight:bold;
+        }
+        menu:hover > menu{
+            display:block;
+        }
+        menu > menu{
+            display:none;
+            position:relative;
+            top:-20px;
+            left:100%;
+            width:55px;
+        }
+        menu[title]:before{
+            content:attr(title);
+        }
+        menu:not([title]):before{
+            content:"\2630";
+        }
+    </style>
+</head>
+
+
+
+<body>
+
+
+<!-- Left Panel -->
+
+<aside id="left-panel" class="left-panel">
+    <nav class="navbar navbar-expand-sm navbar-default" style="position: fixed">
+
+        <div id="main-menu" class="main-menu collapse navbar-collapse">
+            <ul style="list-style: none" class="nav navbar-nav">
+                <li class="active">
+                    <a href="backup.html"> <i class="menu-icon fa fa-dashboard"></i>Dashboard </a>
+                </li>
+                <h3 class="menu-title">SEARCH</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-laptop"></i>SEARCH</a>-->
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="fa fa-puzzle-piece"></i><a href="backup.html">Search Posts</a></li>
+                    </ul>
+                </li>
+
+                <h3 class="menu-title">SUBQUERIES</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-tasks"></i>SubQueries</a>-->
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-fort-awesome"></i><a href="all.html">All</a></li>
+                    </ul>
+                </li>
+                <h3 class="menu-title">EXTRAS</h3><!-- /.menu-title -->
+                <li class="menu-item-has-children dropdown">
+                    <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <i class="menu-icon fa fa-glass"></i>Extras</a>-->
+                    <ul class="sub-menu children dropdown-menu">
+                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">Logout</a></li>
+                        <li><i class="menu-icon fa fa-sign-in"></i><a href="page-login.html">ElasticSearch</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+</aside><!-- /#left-panel -->
+
+<!-- Left Panel -->
+
+<!-- Right Panel -->
+
+<div id="right-panel" class="right-panel">
+
+    <!-- Header-->
+    <header id="header" class="header">
+
+        <div class="header-menu">
+
+        </div>
+
+    </header><!-- /header -->
+    <!-- Header-->
+
+    <div class="breadcrumbs">
+        <div class="col-sm-4">
+            <div class="page-header float-left">
+                <div class="page-title">
+                    <h1>Dashboard</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="break" style="padding-top: 20px"></div>
+
+    <div class="content mt-3">
+        <h3>USERNAME</h3>
+        <div class="col-sm-12">
+            <div class="alert  alert-success alert-dismissible fade show" role="alert">
+                <span class="info" id="info" style="visibility: hidden" class="badge badge-pill badge-success">Success! The following posts were found.</span>
+            </div>
+        </div>
+
+
+        <div class="break" style="padding-top: 30px"></div>
+        <!--<div class="info" id="info" style="visibility: hidden">INFO</div>-->
+
+        <ul class="posts" id="posts">
+            <li style="list-style: none" class="li" id="li">
+                <div class="post" id="post" style="visibility: hidden; ">
+
+
+                    <div id="chat" class="chat">
+                        <div id="postTime" class="postTime"></div>
+                        <div id="userInfo" class="userInfo">
+                            <a id="userName" href="" class="userName margin0"></a>
+                            <p id="userStatus" class="userStatus margin0"></p>
+                            <br>
+                            <p id="userRegDate" class="userRegDate margin0"></p>
+                            <p id="userPostCount" class="userPostCount margin0"> </p>
+                            <br>
+                            <a id="topicName" href="" class="topicName margin0"></a>
+
+                        </div>
+                        <div id="text" class="info margin0"> </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+        <!---->
+    </div> <!-- .content -->
+</div><!-- /#right-panel -->
+
+<!-- Right Panel -->
+
+<script src="vendors/jquery/dist/jquery.min.js"></script>
+<script src="vendors/popper.js/dist/umd/popper.min.js"></script>
+<script src="vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="assets/js/main.js"></script>
+
+
+<script src="vendors/chart.js/dist/Chart.bundle.min.js"></script>
+<script src="assets/js/dashboard.js"></script>
+<script src="assets/js/widgets.js"></script>
+<script src="vendors/jqvmap/dist/jquery.vmap.min.js"></script>
+<script src="vendors/jqvmap/examples/js/jquery.vmap.sampledata.js"></script>
+<script src="vendors/jqvmap/dist/maps/jquery.vmap.world.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/theme-cobalt.js" integrity="sha256-OEJvWvZJvQ8cFFLk43d1UF5DHqWdikG1n8CJQSP70TA=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/mode-yaml.js" integrity="sha256-95xNUgbfIXvRXJezV53+JM5HPO6PnJ+wZ7/GwdesKAE=" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
+
+<script>
+
+    var queryString = decodeURIComponent(window.location.search);
+    queryString = queryString.substring(5);
+
+    sendCode(queryString);
+
+    console.log(sessionStorage.editorXCode)
+    alert(sessionStorage.editorCode)
+
+
+    function sendCode(givenUsername){
+
+        $.ajax({
+            type: 'GET',
+            url: "http://localhost:8080/myapp/myresource/username/"+givenUsername,
+            success: function (responseData, textStatus, jqXHR) {
+                console.log(responseData)
+
+
+                var data = responseData;
+                var c=0;
+                for ( var i in data) {
+                     var status = data[i].userStatus;
+                    var name = data[i].userName;
+
+                    var postTime = data[i].postTime;
+
+                    var userRegDate = data[i].userRegDate;
+                    var userPostCount = data[i].userPostCount;
+
+                    var text = data[i].text;
+                    var topicName = data[i].topicName;
+                    var topicID = data[i].topicId;
+
+
+
+//                var topicId = data[i].topicId;
+//                var message = data[i].text;
+//                var forumIdInfo = data[i].forumId;
+
+
+                    var div = document.getElementById('post');
+                    div.style.display = "block";
+                    div.style.visibility="visible";
+
+                    var postTimeInfo = document.getElementById('postTime');
+                    postTimeInfo.innerText = postTime;
+
+
+                    var userNameInfo = document.getElementById('userName');
+                    userNameInfo.innerText = name;
+                    userNameInfo.href = "username.html?ref="+name;
+
+
+                    var userStatusInfo = document.getElementById('userStatus');
+                    userStatusInfo.innerText = status;
+
+                    var userRegDateInfo = document.getElementById('userRegDate');
+                    userRegDateInfo.innerText = "Registered : "+userRegDate;
+
+                    var userPostCountInfo = document.getElementById('userPostCount');
+                    userPostCountInfo.innerText = "Posts : "+userPostCount;
+
+                    var textInfo = document.getElementById('text');
+                    textInfo.innerText = text;
+
+
+                    var topicNameInfo = document.getElementById('topicName');
+                    topicNameInfo.innerText = topicName;
+                    topicNameInfo.href = "topicID.html?ref="+topicID;
+
+
+
+                    c++;
+
+                    if(c != data.length) {
+                        var ul = document.getElementById('posts');
+                        var li = document.getElementById('li');
+                        var post = document.getElementById('post');
+
+                        li.appendChild(post.cloneNode(true));
+                        ul.appendChild(li);
+                    }
+                }
+
+
+            },
+            error: function (responseData, textStatus, errorThrown) {
+                alert(errorThrown);
+            }
+
+
+        });
+    }
+
+</script>
+
+
+</body>
+
+</html>

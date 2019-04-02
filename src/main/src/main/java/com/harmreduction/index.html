@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <!-- when using the mode "code", it's important to specify charset utf-8 -->
+    <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+</head>
+<body>
+<div id="text"><button type="button" onclick="start()">Say Hello!</button></div>
+<script>
+    var asyncRequest;
+    function start(){
+        try
+        {
+            console.log("hi")
+            asyncRequest = new XMLHttpRequest();
+            asyncRequest.addEventListener("readystatechange", stateChange, false);
+            asyncRequest.open('GET', './Test/users', true);    //   /Test is url to Servlet!
+            asyncRequest.send(null);
+        }
+        catch(exception)
+        {
+            alert("Request failed");
+        }
+    }
+
+    function stateChange(){
+        if(asyncRequest.readyState == 4 && asyncRequest.status == 200)
+        {
+            var text = document.getElementById("text");         //  text is an id of a
+            text.innerHTML = asyncRequest.responseText;         //  div in HTML document
+        }
+    }
+</script>
+</body>
+</html>

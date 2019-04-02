@@ -1,0 +1,27 @@
+{
+  "size": 20,
+  "match_phrase": [
+    {
+      "match": {
+        "text": "oxicodone oxicontin diamorphine codeine"
+      }
+    },
+    {
+      "match_phrase": "hi"
+    }
+  ],
+  "bool": {
+    "must": [
+      {
+        "match": {
+          "text": "oxicodone oxicontin diamorphine codeine"
+        }
+      },
+      {
+        "match": {
+          "text": "heroin "
+        }
+      }
+    ]
+  }
+}
